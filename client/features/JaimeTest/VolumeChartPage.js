@@ -9,7 +9,7 @@ const VolumeChartPage = ({ ticker }) => {
       // Replace with your API URL
       const response = await fetch(`/polygon/candlestick/${ticker}`);
       const data = await response.json();
-      console.log("Fetched data:", data);
+      //console.log("Fetched data:", data);
 
       setStockData(data);
     };

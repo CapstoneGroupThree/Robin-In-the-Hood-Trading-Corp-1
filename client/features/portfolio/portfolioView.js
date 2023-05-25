@@ -50,13 +50,13 @@ const Portfolio = () => {
             holiday.name !== "Veterans Day" && holiday.name !== "Columbus Day"
         )
         .map((holiday) => holiday.date);
-      // console.log(
+      // //console.log(
       //   "🚀 ~ file: index.js:102 ~ fetchHolidays ~ filteredHolidays:",
       //   filteredHolidays
       // );
       return filteredHolidays;
     } catch (error) {
-      console.error("Error fetching holidays:", error);
+      //console.error("Error fetching holidays:", error);
     }
     return [];
   };
@@ -80,7 +80,7 @@ const Portfolio = () => {
     const dayOfWeek = now.getDay(); // 0 is Sunday, 6 is Saturday
     const hour = now.getHours();
     const minute = now.getMinutes();
-    console.log(dayOfWeek, hour, minute);
+    //console.log(dayOfWeek, hour, minute);
 
     // Check if the current date is a holiday
     const isHoliday = holidays.includes(to);
@@ -92,7 +92,7 @@ const Portfolio = () => {
       (hour > 9 || (hour === 9 && minute >= 50)) &&
       hour < 16 &&
       !isHoliday;
-    console.log(marketOpen);
+    //console.log(marketOpen);
 
     const isPreMarket =
       dayOfWeek >= 1 &&
@@ -150,16 +150,16 @@ const Portfolio = () => {
         : getMostRecentTradingDay(now, marketOpen, isPreMarket);
     to = marketOpen || isPreMarket ? to : from;
 
-    // console.log(marketOpen);
-    // console.log(from, to);
+    // //console.log(marketOpen);
+    // //console.log(from, to);
     // Pass marketOpen and from, to to the thunk
     const getTickerPrice = async (ticker) => {
       let tickerPriceInfo = await dispatch(
         fetchSingleStockTickerPriceInfo({ ticker, marketOpen, from, to })
       );
       //save misc info into state
-      // await console.log(tickerPriceInfo);\
-      console.log(tickerPriceInfo.payload);
+      // await //console.log(tickerPriceInfo);\
+      //console.log(tickerPriceInfo.payload);
       return tickerPriceInfo.payload;
     };
     return getTickerPrice(ticker);
@@ -167,9 +167,9 @@ const Portfolio = () => {
 
   const fetchPortfolioData = async () => {
     if (portfolio) {
-      console.log(portfolio);
+      //console.log(portfolio);
       const promises = portfolio.map(async (portfolioItem) => {
-        console.log(portfolioItem.stockTicker, portfolioItem.quantity);
+        //console.log(portfolioItem.stockTicker, portfolioItem.quantity);
         const tickerInfo = await getStockInfo(portfolioItem.stockTicker);
         return {
           ticker: portfolioItem.stockTicker,
@@ -179,12 +179,12 @@ const Portfolio = () => {
       });
 
       const info = await Promise.all(promises);
-      console.log(info);
+      //console.log(info);
       const totalValuation = info.reduce((total, stock) => {
         const stockValue = stock.quantity * stock.price;
         return total + stockValue;
       }, 0);
-      console.log(totalValuation);
+      //console.log(totalValuation);
       if (totalValuation !== 0) {
         //todo this is just going through weird for some reason
         dispatch(updatePortfolioValuation({ id: userId, totalValuation }));
@@ -221,7 +221,6 @@ const Portfolio = () => {
 
   return (
     <div className="flex flex-col h-full p-4 portfolio-bg">
-      {console.log("portfolio", portfolio)}
       <h1
         className="px-4  mb-4 text-center font-body text-white"
         style={{
@@ -230,7 +229,7 @@ const Portfolio = () => {
       >
         Hello {yourName}!
       </h1>
-      {console.log("UserId:", userId)}
+
       <div
         className="assets relative min-h-500 border border-slate-600 w-full text-white bg-gradient-to-t from-slate-900 via-slate-700 to-slate-900 p-4 rounded box-shadow"
         style={{ minHeight: "310px" }}
@@ -362,7 +361,6 @@ const Portfolio = () => {
               </tr>
             </thead>
             <tbody>
-              {console.log(transactions)}
               {transactions &&
                 transactions.map((t, index) => {
                   return (
@@ -406,8 +404,6 @@ const Portfolio = () => {
           return <div key={port.id}>{port.stockName}</div>;
         })}
       </div> */}
-      {console.log("Our React Portfolio:", portfolio)}
-      {console.log("Our React Transactions", transactions)}
     </div>
   );
 };

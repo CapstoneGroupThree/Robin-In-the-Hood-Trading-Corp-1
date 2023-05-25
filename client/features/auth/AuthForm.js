@@ -45,7 +45,7 @@ const AuthForm = ({ name, displayName }) => {
           setError("Wrong email or password.");
         }
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     }
   };

@@ -90,7 +90,7 @@ const AllStocksView = () => {
       // );
       return filteredHolidays;
     } catch (error) {
-      console.error("Error fetching holidays:", error);
+      // console.error("Error fetching holidays:", error);
       return [];
     }
   };
@@ -110,7 +110,7 @@ const AllStocksView = () => {
     const dayOfWeek = now.getDay(); // 0 is Sunday, 6 is Saturday
     const hour = now.getHours();
     const minute = now.getMinutes();
-    console.log(hour, minute);
+    // console.log(hour, minute);
 
     // Check if the current date is a holiday
     const isHoliday = holidays.includes(to);
@@ -122,7 +122,7 @@ const AllStocksView = () => {
       (hour > 9 || (hour === 9 && minute >= 50)) &&
       hour < 16 &&
       !isHoliday;
-    console.log(marketOpen);
+    // console.log(marketOpen);
 
     const isPreMarket =
       dayOfWeek >= 1 &&
@@ -240,7 +240,7 @@ const AllStocksView = () => {
       })
     );
     // await console.log(tickerPriceInfo);
-    console.log(tickerPriceInfo.payload);
+    //console.log(tickerPriceInfo.payload);
     return tickerPriceInfo.payload.close || tickerPriceInfo.payload.preMarket;
   };
 
@@ -250,12 +250,12 @@ const AllStocksView = () => {
       const page = currentPage;
       //todo import date functionality and pass it to the fetchAllStocks
 
-      console.log("Date:", to, "Page:", page);
+      //console.log("Date:", to, "Page:", page);
       const currentPageInfo = await dispatch(
         fetchAllStocks({ date: to, page: page })
       );
 
-      await console.log(currentPageInfo.payload.results);
+      //await console.log(currentPageInfo.payload.results);
       const fetchedInfo = currentPageInfo.payload.results;
       // const fetchedInfoNameCap = fetchedInfo.map((info) => {info = {T: info.T}});
       //
@@ -266,10 +266,10 @@ const AllStocksView = () => {
             fetchAllStockDetails({ ticker: stock.T })
           );
           const price = await getTickerPrice(stock.T, marketOpen, from, to);
-          console.log(fetchedNameCap.payload.results);
+          //console.log(fetchedNameCap.payload.results);
           objInfo[stock.T] = fetchedNameCap.payload.results;
           objInfo[stock.T].price = price;
-          console.log(objInfo);
+          //console.log(objInfo);
           if (Object.keys(objInfo).length >= 10) {
             setCurrentPageNameCapInfo(objInfo);
           }
@@ -359,7 +359,6 @@ const AllStocksView = () => {
         </div>
       </div>
 
-      {console.log(currentPageNameCapInfo)}
       {Object.keys(allStocks).length === 0 && <div>Loading stocks...</div>}
       {Object.keys(allStocks).length > 0 && (
         <table

@@ -63,7 +63,7 @@ export const editUserProfileInfo = createAsyncThunk(
         return res.data;
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       return "Please input the correct previous password";
     }
   }

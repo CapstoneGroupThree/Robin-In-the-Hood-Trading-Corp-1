@@ -54,13 +54,13 @@ const WatchListView = () => {
             holiday.name !== "Veterans Day" && holiday.name !== "Columbus Day"
         )
         .map((holiday) => holiday.date);
-      // console.log(
+      // //console.log(
       //   "🚀 ~ file: index.js:102 ~ fetchHolidays ~ filteredHolidays:",
       //   filteredHolidays
       // );
       return filteredHolidays;
     } catch (error) {
-      console.error("Error fetching holidays:", error);
+      //console.error("Error fetching holidays:", error);
       return [];
     }
   };
@@ -91,7 +91,7 @@ const WatchListView = () => {
       (hour > 9 || (hour === 9 && minute >= 50)) &&
       hour < 16 &&
       !isHoliday;
-    console.log(marketOpen);
+    //console.log(marketOpen);
 
     const isPreMarket =
       dayOfWeek >= 1 &&
@@ -148,8 +148,8 @@ const WatchListView = () => {
         ? to
         : getMostRecentTradingDay(now, marketOpen, isPreMarket);
     to = marketOpen || isPreMarket ? to : from;
-    console.log(marketOpen);
-    // console.log(from, to);
+    //console.log(marketOpen);
+    // //console.log(from, to);
     // Pass marketOpen and from, to to the thunk
     const getTickerPrice = async (ticker) => {
       let tickerPriceInfo = await dispatch(
@@ -160,11 +160,11 @@ const WatchListView = () => {
           to,
         })
       );
-      await console.log(tickerPriceInfo);
+      //console.log(tickerPriceInfo);
       return tickerPriceInfo.payload.close || tickerPriceInfo.payload.preMarket;
     };
     const tickerPrice = await getTickerPrice(ticker);
-    console.log(`[getStockInfo] Ticker: ${ticker}, Price: ${tickerPrice}`);
+    //console.log(`[getStockInfo] Ticker: ${ticker}, Price: ${tickerPrice}`);
     return tickerPrice;
   };
 
@@ -198,7 +198,7 @@ const WatchListView = () => {
 
   useEffect(() => {
     if (watchlist.list && !hasRunRef.current) {
-      console.log(watchlist.list);
+      //console.log(watchlist.list);
       let list = watchlist.list.filter((ticker) => !watchlist[ticker]);
       //todo once realtime(fake) chart is implemented we need to change this so that it potentially updates every minute etc.
       const runWLStocksFetch = async (list) => {

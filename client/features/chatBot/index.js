@@ -31,7 +31,7 @@ const Chatbot = ({ ticker }) => {
   const [isVoiceOn, setIsVoiceOn] = useState(false);
 
   useEffect(() => {
-    console.log(isVoiceOn);
+    //console.log(isVoiceOn);
     if (!isVoiceOn) {
       speechSynthesis.cancel();
     }
@@ -47,7 +47,7 @@ const Chatbot = ({ ticker }) => {
     const selectedVoice = speechSynthesis
       .getVoices()
       .find((voice) => voice.name === voiceName);
-    console.log(selectedVoice);
+    //console.log(selectedVoice);
     setSelectedVoice(selectedVoice);
   };
 
@@ -96,7 +96,7 @@ const Chatbot = ({ ticker }) => {
         });
         setMicPermissionAllowed(state === "granted");
       } catch (error) {
-        console.error("Error checking microphone permission:", error);
+        //console.error("Error checking microphone permission:", error);
         setMicPermissionAllowed(false);
       }
     };
@@ -211,9 +211,9 @@ const Chatbot = ({ ticker }) => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
+        //console.log(data);
         const parsedData = data.assistant;
-        console.log(parsedData);
+        //console.log(parsedData);
 
         //! magic here
         if (isVoiceOn) {
@@ -235,7 +235,7 @@ const Chatbot = ({ ticker }) => {
                       }
                     : message
                 );
-                // console.log(updatedMessages);
+                // //console.log(updatedMessages);
                 return updatedMessages;
               });
               // //todo added speak text optimize it
@@ -251,7 +251,7 @@ const Chatbot = ({ ticker }) => {
       }
     } catch (err) {
       // alert(err);
-      console.error(err);
+      //console.error(err);
       setMessages((oldMessages) => [
         ...oldMessages,
         {
@@ -303,9 +303,9 @@ const Chatbot = ({ ticker }) => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
+        //console.log(data);
         const parsedData = data.assistant;
-        console.log(parsedData);
+        //console.log(parsedData);
         //! magic here
         if (isVoiceOn) {
           speakText(parsedData);
@@ -326,7 +326,7 @@ const Chatbot = ({ ticker }) => {
                       }
                     : message
                 );
-                console.log(updatedMessages);
+                //console.log(updatedMessages);
                 return updatedMessages;
               });
               // //todo added speak text optimize it
@@ -339,7 +339,7 @@ const Chatbot = ({ ticker }) => {
         }
       }
     } catch (err) {
-      console.error(err);
+      //console.error(err);
       setMessages((oldMessages) => [
         ...oldMessages,
         {
@@ -392,7 +392,7 @@ const Chatbot = ({ ticker }) => {
                       alt={message.role === "assistant" ? "bot" : "user"}
                     ></img>
                   </div>
-                  {/* {console.log(message.content)} */}
+                  {/* {//console.log(message.content)} */}
                   <div className="message">{message.content}</div>
                 </div>
               </div>
@@ -412,7 +412,7 @@ const Chatbot = ({ ticker }) => {
           >
             {speechSynthesis.getVoices().map((voice) => (
               <option key={voice.name} value={voice.name}>
-                {/* {console.log(selectedVoice, voice.name)} */}
+                {/* {//console.log(selectedVoice, voice.name)} */}
                 {voice.name}
               </option>
             ))}

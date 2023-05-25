@@ -40,13 +40,13 @@ const Sell = (props) => {
             holiday.name !== "Veterans Day" && holiday.name !== "Columbus Day"
         )
         .map((holiday) => holiday.date);
-      // console.log(
+      // //console.log(
       //   "🚀 ~ file: index.js:102 ~ fetchHolidays ~ filteredHolidays:",
       //   filteredHolidays
       // );
       return filteredHolidays;
     } catch (error) {
-      console.error("Error fetching holidays:", error);
+      //console.error("Error fetching holidays:", error);
     }
     return [];
   };
@@ -70,7 +70,7 @@ const Sell = (props) => {
     const dayOfWeek = now.getDay(); // 0 is Sunday, 6 is Saturday
     const hour = now.getHours();
     const minute = now.getMinutes();
-    console.log(dayOfWeek, hour, minute);
+    //console.log(dayOfWeek, hour, minute);
 
     // Check if the current date is a holiday
     const isHoliday = holidays.includes(to);
@@ -82,7 +82,7 @@ const Sell = (props) => {
       (hour > 9 || (hour === 9 && minute >= 50)) &&
       hour < 16 &&
       !isHoliday;
-    console.log(marketOpen);
+    //console.log(marketOpen);
     if (marketOpen === true) {
       setMarketOpen(true);
     } else {
@@ -145,16 +145,16 @@ const Sell = (props) => {
         : getMostRecentTradingDay(now, marketOpen, isPreMarket);
     to = marketOpen || isPreMarket ? to : from;
 
-    // console.log(marketOpen);
-    // console.log(from, to);
+    // //console.log(marketOpen);
+    // //console.log(from, to);
     // Pass marketOpen and from, to to the thunk
     const getTickerPrice = async (ticker) => {
       let tickerPriceInfo = await dispatch(
         fetchSingleStockTickerPriceInfo({ ticker, marketOpen, from, to })
       );
       //save misc info into state
-      // await console.log(tickerPriceInfo);\
-      console.log(tickerPriceInfo.payload);
+      // await //console.log(tickerPriceInfo);\
+      //console.log(tickerPriceInfo.payload);
       return tickerPriceInfo.payload;
     };
     return getTickerPrice(ticker);
@@ -164,19 +164,19 @@ const Sell = (props) => {
     const fetchInfoToRender = async () => {
       const priceInfo = await getStockInfo(ticker);
       const portfolioInfo = await dispatch(fetchUserPortfolio({ userId }));
-      console.log(portfolioInfo.payload);
+      //console.log(portfolioInfo.payload);
       const tickerSpecificPortfolio = portfolioInfo.payload.portfolio.filter(
         (portfolioItem) => portfolioItem.stockTicker === ticker
       );
-      console.log(tickerSpecificPortfolio);
+      //console.log(tickerSpecificPortfolio);
       await setUserPortfolio(tickerSpecificPortfolio);
       await setUserBalance(portfolioInfo.payload.latestBalance);
 
-      await console.log(priceInfo.results);
+      await //console.log(priceInfo.results);
 
       setTickerPriceInfo(priceInfo.results[0].c.toFixed(2));
       // or different during after hours
-      console.log(setTickerPriceInfo);
+      //console.log(setTickerPriceInfo);
       setIsLoading(false);
     };
     fetchInfoToRender();
@@ -207,7 +207,7 @@ const Sell = (props) => {
         purchasePrice: tickerPriceInfo,
       })
     );
-    console.log(response);
+    //console.log(response);
     await dispatch(fetchSinglePortfolio(id));
     setQuantity(0);
     setShowPopup(false);
@@ -224,11 +224,9 @@ const Sell = (props) => {
 
   return (
     <div>
-      {console.log(userBalance, userPortfolio)}
       <button
         className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
         onClick={() => {
-          console.log(marketOpen);
           if (marketOpen) {
             setShowPopup(true);
           } else {

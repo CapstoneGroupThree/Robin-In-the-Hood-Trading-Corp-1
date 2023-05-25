@@ -6,7 +6,7 @@ export const fetchAllStocks = createAsyncThunk(
   async ({ date, page }) => {
     try {
       date = "2023-05-16";
-      console.log("Thunk Date:", date, "Thunk Page:", page);
+      // console.log("Thunk Date:", date, "Thunk Page:", page);
       // todo currently hardcoded to the close on the FE, need to make a seperate thunk for price update functionality, getstockpricethunk
       const response = await axios.get("/proxy/mde/all", {
         params: {
@@ -17,7 +17,7 @@ export const fetchAllStocks = createAsyncThunk(
 
       return { results: response.data };
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       return error;
     }
   }
@@ -33,7 +33,7 @@ export const fetchAllStockDetails = createAsyncThunk(
       );
       return { ticker, results: response.data.results };
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       return error;
     }
   }
@@ -43,16 +43,16 @@ export const fetchAllStockTickerPriceSingle = createAsyncThunk(
   "fetchAllStockTickerPriceSingle",
   async ({ ticker, marketOpen, from, to }) => {
     try {
-      console.log("sent");
+      // console.log("sent");
       if (marketOpen) {
-        console.log("me?");
+        // console.log("me?");
         const response = await axios.get(
           `/proxy/mde/aggregates?ticker=${ticker}&from=${from}&to=${to}`
         );
         // console.log(response.data);
         return { ticker, close: response.data.results[0].c };
       } else {
-        console.log("got");
+        // console.log("got");
         const response = await axios.get(
           `/proxy/mde/open-close?ticker=${ticker}&date=${to}`
         );
@@ -64,7 +64,7 @@ export const fetchAllStockTickerPriceSingle = createAsyncThunk(
         };
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       return error;
     }
   }
@@ -83,7 +83,7 @@ const allStocksSlice = createSlice({
       state.stocks = action.payload;
     });
     builder.addCase(fetchAllStockDetails.fulfilled, (state, action) => {
-      console.log("fetch all stock details fulfilled action:", action);
+      // console.log("fetch all stock details fulfilled action:", action);
       // if (!action.payload) return;
 
       const { ticker, name, marketCapitalization } = action.payload;
