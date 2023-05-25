@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import logger from "redux-logger";
+// import logger from "redux-logger";
 import authReducer from "../features/auth/authSlice";
 import allStocksReducer from "../features/allStocks/allStocksSlice";
 import singleStockViewSliceReducer from "../features/singleStock/singleStockViewSlice.js";
@@ -22,7 +22,7 @@ const store = configureStore({
     transactions: transactionSliceReducer,
     searchResults: searchResultsSliceReducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+  // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
 
 export default store;
