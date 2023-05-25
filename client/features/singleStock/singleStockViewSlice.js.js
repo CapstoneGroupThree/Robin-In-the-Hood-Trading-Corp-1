@@ -9,10 +9,10 @@ export const fetchSingleStockInfo = createAsyncThunk(
       const response = await axios.get(
         `/proxy/rde/ticker-details?ticker=${ticker}`
       );
-      console.log(response);
+      // //console.log(response);
       return response.data.results;
     } catch (error) {
-      console.log(error);
+      //console.log(error);
       return error;
     }
   }
@@ -28,7 +28,7 @@ export const fetchSingleStockNews = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   }
 );
@@ -42,7 +42,7 @@ export const fetchSingleStockOpenCloseInfo = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   }
 );
@@ -51,22 +51,22 @@ export const fetchSingleStockOpenCloseInfo = createAsyncThunk(
 export const fetchSingleStockTickerPriceInfo = createAsyncThunk(
   "fetchSingleStockTickerPriceInfo",
   async ({ ticker, marketOpen, from, to }) => {
-    // console.log(ticker, marketOpen, from, to);
-    // console.log(typeof marketOpen);
+    // //console.log(ticker, marketOpen, from, to);
+    // //console.log(typeof marketOpen);
     try {
-      console.log(marketOpen);
-      console.log(from, to);
+      //console.log(marketOpen);
+      //console.log(from, to);
       if (marketOpen) {
         const response = await axios.get(
           `/proxy/mde/aggregates?ticker=${ticker}&from=${from}&to=${to}`
         );
-        console.log(response.data);
+        //console.log(response.data);
         return response.data;
       } else if (!marketOpen) {
         const response = await axios.get(
           `/proxy/mde/open-close?ticker=${ticker}&date=${to}`
         );
-        console.log(response.data);
+        //console.log(response.data);
         return response.data;
         // {
         //   status: 'OK',
@@ -80,7 +80,7 @@ export const fetchSingleStockTickerPriceInfo = createAsyncThunk(
         // }
       }
     } catch (error) {
-      console.log(error);
+      //console.log(error);
       return error;
     }
   }
@@ -108,7 +108,7 @@ export const singleStockViewSlice = createSlice({
     builder.addCase(
       fetchSingleStockOpenCloseInfo.fulfilled,
       (state, action) => {
-        console.log("Action payload:", action.payload);
+        //console.log("Action payload:", action.payload);
         state.singleStock.openClose = action.payload;
       }
     );
