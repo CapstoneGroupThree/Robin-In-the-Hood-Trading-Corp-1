@@ -8,7 +8,7 @@ export const fetchEntireWatchList = createAsyncThunk(
       const watchlist = await axios.get(`/proxy/watchlist/${id}`);
       return watchlist.data;
     } catch (error) {
-      console.log(error);
+      ////console.log(error);
     }
   }
 );
@@ -22,7 +22,7 @@ export const addWatchListItem = createAsyncThunk(
       });
       return updatedWatchlist.data;
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   }
 );
@@ -36,7 +36,7 @@ export const removeWatchListItem = createAsyncThunk(
       );
       return { ticker, tickers: afterItemDeleteWL.data.tickers };
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   }
 );
@@ -50,7 +50,7 @@ export const fetchWLSingleStockName = createAsyncThunk(
       );
       return { ticker, results: response.data.results };
     } catch (error) {
-      console.log(error);
+      //console.log(error);
       return error;
     }
   }
@@ -60,20 +60,20 @@ export const fetchWLSingleStockTickerPrice = createAsyncThunk(
   "fetchWLStockTickerPrice",
   async ({ ticker, marketOpen, from, to }) => {
     try {
-      console.log("sent");
+      //console.log("sent");
       if (marketOpen) {
-        console.log("me?");
+        //console.log("me?");
         const response = await axios.get(
           `/proxy/mde/aggregates?ticker=${ticker}&from=${from}&to=${to}`
         );
-        console.log(response.data);
+        //console.log(response.data);
         return { ticker, close: response.data.results[0].c };
       } else {
-        console.log("got");
+        //console.log("got");
         const response = await axios.get(
           `/proxy/mde/open-close?ticker=${ticker}&date=${to}`
         );
-        console.log(response.data);
+        //console.log(response.data);
         return {
           ticker,
           close: response.data.close,
@@ -81,7 +81,7 @@ export const fetchWLSingleStockTickerPrice = createAsyncThunk(
         };
       }
     } catch (error) {
-      console.log(error);
+      //console.log(error);
       return error;
     }
   }
@@ -112,7 +112,7 @@ export const watchlistStocksViewSlice = createSlice({
       fetchWLSingleStockTickerPrice.fulfilled,
       (state, action) => {
         const ticker = action.payload.ticker;
-        console.log(action.payload.preMarket);
+        //console.log(action.payload.preMarket);
         if (!state.watchlist[ticker]) {
           state.watchlist[ticker] = {};
         }

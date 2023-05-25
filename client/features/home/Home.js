@@ -52,13 +52,13 @@ const Home = () => {
             holiday.name !== "Veterans Day" && holiday.name !== "Columbus Day"
         )
         .map((holiday) => holiday.date);
-      // console.log(
+      // //console.log(
       //   "🚀 ~ file: index.js:102 ~ fetchHolidays ~ filteredHolidays:",
       //   filteredHolidays
       // );
       return filteredHolidays;
     } catch (error) {
-      console.error("Error fetching holidays:", error);
+      //console.error("Error fetching holidays:", error);
     }
     return [];
   };
@@ -82,7 +82,7 @@ const Home = () => {
     const dayOfWeek = now.getDay(); // 0 is Sunday, 6 is Saturday
     const hour = now.getHours();
     const minute = now.getMinutes();
-    console.log(dayOfWeek, hour, minute);
+    //console.log(dayOfWeek, hour, minute);
 
     // Check if the current date is a holiday
     const isHoliday = holidays.includes(to);
@@ -94,7 +94,7 @@ const Home = () => {
       (hour > 9 || (hour === 9 && minute >= 50)) &&
       hour < 16 &&
       !isHoliday;
-    console.log(marketOpen);
+    //console.log(marketOpen);
 
     const isPreMarket =
       dayOfWeek >= 1 &&
@@ -152,16 +152,16 @@ const Home = () => {
         : getMostRecentTradingDay(now, marketOpen, isPreMarket);
     to = marketOpen || isPreMarket ? to : from;
 
-    // console.log(marketOpen);
-    // console.log(from, to);
+    // //console.log(marketOpen);
+    // //console.log(from, to);
     // Pass marketOpen and from, to to the thunk
     const getTickerPrice = async (ticker) => {
       let tickerPriceInfo = await dispatch(
         fetchSingleStockTickerPriceInfo({ ticker, marketOpen, from, to })
       );
       //save misc info into state
-      // await console.log(tickerPriceInfo);\
-      console.log(tickerPriceInfo.payload);
+      // await //console.log(tickerPriceInfo);\
+      //console.log(tickerPriceInfo.payload);
       return tickerPriceInfo.payload;
     };
     return getTickerPrice(ticker);
@@ -169,11 +169,11 @@ const Home = () => {
 
   const fetchPortfolioData = async () => {
     if (portfolio) {
-      console.log(portfolio);
+      //console.log(portfolio);
       const promises = portfolio.map(async (portfolioItem) => {
-        console.log(portfolioItem.stockTicker, portfolioItem.quantity);
+        //console.log(portfolioItem.stockTicker, portfolioItem.quantity);
         const tickerInfo = await getStockInfo(portfolioItem.stockTicker);
-        console.log(tickerInfo);
+        //console.log(tickerInfo);
         return {
           ticker: portfolioItem.stockTicker,
           quantity: portfolioItem.quantity,
@@ -182,15 +182,15 @@ const Home = () => {
       });
 
       const info = await Promise.all(promises);
-      console.log(info);
+      //console.log(info);
       const totalValuation = info.reduce((total, stock) => {
         const stockValue = stock.quantity * stock.price;
         return total + stockValue;
       }, 0);
-      console.log(totalValuation);
+      //console.log(totalValuation);
       if (totalValuation !== 0) {
         //todo
-        console.log("sneaky", totalValuation, portfolio);
+        //console.log("sneaky", totalValuation, portfolio);
         dispatch(updatePortfolioValuation({ id: userId, totalValuation }));
       }
       setReload(reload + 1);
@@ -217,13 +217,11 @@ const Home = () => {
     //   <div className="animate-spin rounded-full h-64 w-64 border-t-8 border-b-8  border-purple-500"></div>
     // </div>
   }
-  // console.log(displayedName);
+  // //console.log(displayedName);
   //todo create a search bar feature for pages that need it
   //todo need to get it working on my route pull
   return (
     <div className=" flex flex-col antialiased bg-transparent home-bg w-full h-full justify-between overflow-hidden">
-      {console.log(portfolio)}
-
       <div className="flex items-center justify-between align-middle w-full text-center text-white pl-4 pr-4  ">
         <h1 className=" font-head text-3xl text-shadow-lg">Home</h1>
         <SearchBar name={displayedName} className="" />

@@ -39,7 +39,7 @@ const ClosePriceChartPage = (props) => {
       // );
       setHolidays(filteredHolidays);
     } catch (error) {
-      console.error("Error fetching holidays:", error);
+      //console.error("Error fetching holidays:", error);
       return [];
     }
   };

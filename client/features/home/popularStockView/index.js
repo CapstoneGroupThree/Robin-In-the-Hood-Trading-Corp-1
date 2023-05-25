@@ -15,7 +15,7 @@ const PopularStocksHomeView = () => {
   const [isLoading, setIsLoading] = useState(true);
   //this is where we have the things in the state
   const popularStocks = useSelector(selectSinglePopularStock);
-  // console.log(popularStocks);
+  // //console.log(popularStocks);
 
   const tickerNames = [
     "GOOGL",
@@ -79,13 +79,13 @@ const PopularStocksHomeView = () => {
             holiday.name !== "Veterans Day" && holiday.name !== "Columbus Day"
         )
         .map((holiday) => holiday.date);
-      // console.log(
+      // //console.log(
       //   "🚀 ~ file: index.js:102 ~ fetchHolidays ~ filteredHolidays:",
       //   filteredHolidays
       // );
       return filteredHolidays;
     } catch (error) {
-      console.error("Error fetching holidays:", error);
+      //console.error("Error fetching holidays:", error);
       return [];
     }
   };
@@ -116,7 +116,7 @@ const PopularStocksHomeView = () => {
       (hour > 9 || (hour === 9 && minute >= 50)) &&
       hour < 16 &&
       !isHoliday;
-    console.log(marketOpen);
+    //console.log(marketOpen);
 
     const isPreMarket =
       dayOfWeek >= 1 &&
@@ -172,9 +172,9 @@ const PopularStocksHomeView = () => {
         ? to
         : getMostRecentTradingDay(now, marketOpen, isPreMarket);
     to = marketOpen || isPreMarket ? to : from;
-    //! for some reason market open was passing in as true before i put this console log in, does it past the 3rd call.... going to fix in watchlist view as well.
-    console.log(marketOpen);
-    // console.log(from, to);
+    //! for some reason market open was passing in as true before i put this //console log in, does it past the 3rd call.... going to fix in watchlist view as well.
+    //console.log(marketOpen);
+    // //console.log(from, to);
     // Pass marketOpen and from, to to the thunk
     const getTickerPrice = async (ticker) => {
       let tickerPriceInfo = await dispatch(
@@ -185,11 +185,11 @@ const PopularStocksHomeView = () => {
           to,
         })
       );
-      // await console.log(tickerPriceInfo);
+      // await //console.log(tickerPriceInfo);
       return tickerPriceInfo.payload.close;
     };
     const tickerPrice = await getTickerPrice(ticker);
-    console.log(`[getStockInfo] Ticker: ${ticker}, Price: ${tickerPrice}`);
+    //console.log(`[getStockInfo] Ticker: ${ticker}, Price: ${tickerPrice}`);
     return tickerPrice;
   };
 
@@ -224,13 +224,13 @@ const PopularStocksHomeView = () => {
   };
 
   let numOfPopStocksInfoInState = Object.keys(popularStocks).length;
-  console.log(numOfPopStocksInfoInState);
+  //console.log(numOfPopStocksInfoInState);
 
   const runPopStocksFetch = async (arrTickers) => {
     const fetchStockData = async (ticker) => {
       await getStockInfo(ticker);
       await getTickerName(ticker);
-      console.log("done");
+      //console.log("done");
     };
 
     await Promise.all(arrTickers.map(fetchStockData));
@@ -238,13 +238,13 @@ const PopularStocksHomeView = () => {
 
   useEffect(() => {
     const selectedTickers = getRandomTickers();
-    console.log(selectedTickers);
+    //console.log(selectedTickers);
 
     if (numOfPopStocksInfoInState < 4) {
-      console.log("running fetch");
+      //console.log("running fetch");
       runPopStocksFetch(selectedTickers).then((success) => {
         if (success) {
-          console.log("done loading");
+          //console.log("done loading");
           setIsLoading(false);
         }
       });

@@ -10,7 +10,7 @@ export const fetchSinglePopularStockName = createAsyncThunk(
       );
       return { ticker, results: response.data.results };
     } catch (error) {
-      console.log(error);
+      //console.log(error);
       return error;
     }
   }
@@ -20,20 +20,20 @@ export const fetchSinglePopularStockTickerPrice = createAsyncThunk(
   "fetchPopStockTickerPrice",
   async ({ ticker, marketOpen, from, to }) => {
     try {
-      console.log("sent");
+      //console.log("sent");
       if (marketOpen) {
-        console.log("me?");
+        //console.log("me?");
         const response = await axios.get(
           `/proxy/mde/aggregates?ticker=${ticker}&from=${from}&to=${to}`
         );
-        console.log(response.data);
+        //console.log(response.data);
         return { ticker, close: response.data.results[0].c };
       } else {
-        console.log("got");
+        //console.log("got");
         const response = await axios.get(
           `/proxy/mde/open-close?ticker=${ticker}&date=${to}`
         );
-        console.log(response.data);
+        //console.log(response.data);
         return {
           ticker,
           close: response.data.close,
@@ -41,7 +41,7 @@ export const fetchSinglePopularStockTickerPrice = createAsyncThunk(
         };
       }
     } catch (error) {
-      console.log(error);
+      //console.log(error);
       return error;
     }
   }

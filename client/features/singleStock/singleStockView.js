@@ -37,7 +37,7 @@ export default function SingleStockView() {
   const [currentChart, setCurrentChart] = useState("stockData");
   const [marketOpen, setMarketOpen] = useState("");
   // const allState = useSelector((state) => state);
-  // console.log("All state:", allState);
+  // //console.log("All state:", allState);
   const handleTransactionComplete = (status) => {
     setTransactionStatus(status);
   };
@@ -51,24 +51,24 @@ export default function SingleStockView() {
     setPrevTicker(ticker);
   }, [ticker, prevTicker]);
 
-  console.log(id);
+  //console.log(id);
 
   useEffect(() => {
     const fetchInfoToRender = async () => {
       // const priceInfo = await getStockInfo(ticker);
       const portfolioInfo = await dispatch(fetchUserPortfolio({ userId: id }));
-      console.log(portfolioInfo.payload);
+      //console.log(portfolioInfo.payload);
       const tickerSpecificPortfolio = portfolioInfo.payload.portfolio.filter(
         (portfolioItem) => portfolioItem.stockTicker === ticker
       );
-      console.log(tickerSpecificPortfolio);
+      //console.log(tickerSpecificPortfolio);
       await setUserPortfolio(tickerSpecificPortfolio);
       await setUserBalance(portfolioInfo.payload.latestBalance);
 
-      // await console.log(priceInfo.results);
+      // await //console.log(priceInfo.results);
 
       // setTickerPriceInfo(priceInfo.results[0].c.toFixed(2));
-      // console.log(setTickerPriceInfo);
+      // //console.log(setTickerPriceInfo);
       setIsLoading(false);
     };
     fetchInfoToRender();
@@ -100,13 +100,13 @@ export default function SingleStockView() {
             holiday.name !== "Veterans Day" && holiday.name !== "Columbus Day"
         )
         .map((holiday) => holiday.date);
-      // console.log(
+      // //console.log(
       //   "🚀 ~ file: index.js:102 ~ fetchHolidays ~ filteredHolidays:",
       //   filteredHolidays
       // );
       return filteredHolidays;
     } catch (error) {
-      console.error("Error fetching holidays:", error);
+      //console.error("Error fetching holidays:", error);
       return [];
     }
   };
@@ -128,7 +128,7 @@ export default function SingleStockView() {
     const dayOfWeek = now.getDay(); // 0 is Sunday, 6 is Saturday
     const hour = now.getHours();
     const minute = now.getMinutes();
-    console.log(dayOfWeek, hour, minute);
+    //console.log(dayOfWeek, hour, minute);
 
     // Check if the current date is a holiday
     const isHoliday = holidays.includes(to);
@@ -140,7 +140,7 @@ export default function SingleStockView() {
       (hour > 9 || (hour === 9 && minute >= 50)) &&
       hour < 16 &&
       !isHoliday;
-    console.log(marketOpen);
+    //console.log(marketOpen);
     if (marketOpen) {
       setMarketOpen(true);
     } else {
@@ -203,8 +203,8 @@ export default function SingleStockView() {
         : getMostRecentTradingDay(now, marketOpen, isPreMarket);
     to = marketOpen || isPreMarket ? to : from;
 
-    // console.log(marketOpen);
-    // console.log(from, to);
+    // //console.log(marketOpen);
+    // //console.log(from, to);
     // Pass marketOpen and from, to to the thunk
     const getTickerPrice = async (ticker) => {
       let tickerPriceInfo = await dispatch(
@@ -214,9 +214,9 @@ export default function SingleStockView() {
       const response = await dispatch(
         fetchSingleStockOpenCloseInfo({ ticker, to })
       ).unwrap();
-      console.log("Response from fetchSingleStockOpenCloseInfo:", response);
-      // await console.log(tickerPriceInfo);\
-      console.log(tickerPriceInfo.payload);
+      //console.log("Response from fetchSingleStockOpenCloseInfo:", response);
+      // await //console.log(tickerPriceInfo);\
+      //console.log(tickerPriceInfo.payload);
       return tickerPriceInfo.payload;
     };
     return getTickerPrice(ticker);
@@ -236,15 +236,15 @@ export default function SingleStockView() {
     const info = await dispatch(fetchSingleStockInfo({ ticker }));
     const news = await dispatch(fetchSingleStockNews({ ticker }));
 
-    // await console.log(info.payload);
-    // await console.log(news.payload);
-    // await console.log(priceInfo);
+    // await //console.log(info.payload);
+    // await //console.log(news.payload);
+    // await //console.log(priceInfo);
     setTickerInfo(info.payload);
     setTickerNews(news.payload.results);
     setIsLoading(false);
 
-    // console.log(tickerInfo);
-    // console.log(tickerNews);
+    // //console.log(tickerInfo);
+    // //console.log(tickerNews);
   };
 
   const fetchPriceInfoToRender = async () => {
@@ -277,7 +277,7 @@ export default function SingleStockView() {
   const handleAddToWatchList = async (e) => {
     e.preventDefault();
     let ticker = e.target.value;
-    console.log(ticker);
+    //console.log(ticker);
     await dispatch(addWatchListItem({ id, ticker }));
     alert(`Added ${ticker} to watchlist!`);
   };
@@ -297,10 +297,6 @@ export default function SingleStockView() {
   //! potentially might break during weekdays based on different api calls
   return (
     <div className="font-semibold flex flex-col pt-1 pl-4 pr-4 pb-4 h-screen justify-between max-h-screen singleStock-bg text-white overflow-hidden">
-      {console.log("singleStockInfoOpenCLose", singleStockInfo.openClose)}
-      {console.log(tickerInfo)}
-      {console.log(tickerPriceInfo)}
-
       {/* Header */}
       <div className="flex  items-center mb-2 ">
         <div className="flex items-center">
@@ -418,7 +414,6 @@ export default function SingleStockView() {
         <div className="  overflow-y-scroll scroll-style  h-5/6 max-h-full w-5/12 border border-sky-800 p-2 rounded-md bg-gradient-to-t from-slate-900 to slate-950 text-white shadow-md shadow-black">
           <h2 className="flex items-center justify-center">News</h2>
           <div>
-            {console.log("here", tickerNews)}
             {tickerNews && tickerNews.length > 0 ? (
               tickerNews.map((news) => (
                 <div
@@ -456,13 +451,13 @@ export default function SingleStockView() {
       {/* Footer */}
       <div className=" flex absolute bottom-0 items-center mb-4 footer ">
         {/* <button
-          onClick={() => console.log("Buy functionality")}
+          onClick={() => //console.log("Buy functionality")}
           className=" buy-button"
         >
           Buy
         </button>
         <button
-          onClick={() => console.log("Sell functionality")}
+          onClick={() => //console.log("Sell functionality")}
           className="sell-button"
         >
           Sell
@@ -508,7 +503,6 @@ export default function SingleStockView() {
           alt="your AI chat assistant"
           className="w-20 h-20"
         ></img> */}
-        {console.log(ticker)}
         <ChatbotWrapper ticker={ticker} />
       </div>
     </div>

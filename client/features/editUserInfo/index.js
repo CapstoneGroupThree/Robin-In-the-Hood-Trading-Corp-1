@@ -21,7 +21,7 @@ const EditUserInfo = () => {
     setEditPasswordMode(false);
     setEditMode(true);
   };
-  console.log(me);
+  //console.log(me);
 
   const handleProfileSubmit = (e) => {
     e.preventDefault();

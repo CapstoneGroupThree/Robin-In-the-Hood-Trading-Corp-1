@@ -22,11 +22,11 @@ const SearchBar = (props) => {
 
   useEffect(() => {
     if (searchResults.status === "failed") {
-      console.error(searchResults.error);
+      //console.error(searchResults.error);
       setQueryResults([]);
       setError("No Corresponding Ticker Info Was Found");
     } else if (searchResults.status === "succeeded") {
-      console.log(searchResults.data);
+      //console.log(searchResults.data);
       setQueryResults(searchResults.data);
       setError(null);
     }
