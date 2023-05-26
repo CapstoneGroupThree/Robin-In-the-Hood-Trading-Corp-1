@@ -29,8 +29,8 @@ async function seed() {
     await db.transaction(async (transaction) => {
       await Promise.all([
         tickerData.map(async (tickerObject) => {
-          await Ticker.create({
-            symbol: tickerObject.T,
+          await Ticker.findOrCreate({
+            where: { symbol: tickerObject.T },
           });
         }),
       ]);
